@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+    <header>
+        <h1>Fitness Tracker</h1>
+        <p>Track your workouts and monitor your progress!</p>
+    </header>
+
+    <nav>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#log-workout">Log Workout</a>
+        <a href="#history">Workout History</a>
+    </nav>
+
+    <main>
+
+        <!-- DASHBOARD -->
+        <section id="dashboard">
+            <h2>Dashboard</h2>
+
+            <div class="dashboard-container">
+                <div class="card">
+                    <h3>Total Workouts</h3>
+                    <p id="total-workouts">0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Total Workout Minutes</h3>
+                    <p id="total-minutes">0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Workouts This Week</h3>
+                    <p id="weekly-workouts">0</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOG WORKOUT -->
+        <section id="log-workout">
+            <h2>Log a Workout</h2>
+
+            <form id="workout-form">
+
+                <label for="workout-name">Workout Name:</label>
+                <input type="text" id="workout-name"
+                       placeholder="Example: Morning Swim" required>
+
+                <label for="workout-type">Workout Type:</label>
+                <select id="workout-type" required>
+                    <option value="">Select Workout</option>
+                    <option value="Swimming">Swimming</option>
+                    <option value="Running">Running</option>
+                    <option value="Biking">Biking</option>
+                    <option value="Weightlifting">Weightlifting</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="workout-date">Workout Date:</label>
+                <input type="date" id="workout-date" required>
+
+                <label for="duration">Duration (minutes):</label>
+                <input type="number" id="duration" min="1" required>
+
+                <label for="distance">Distance (miles):</label>
+                <input type="number" id="distance" min="0" step="0.01">
+
+                <label for="sets">Sets:</label>
+                <input type="number" id="sets" min="0">
+
+                <label for="reps">Reps:</label>
+                <input type="number" id="reps" min="0">
+
+                <label for="weight">Weight (lbs):</label>
+                <input type="number" id="weight" min="0" step="0.5">
+
+                <button type="submit">Save Workout</button>
+
+            </form>
+        </section>
+
+        <!-- WORKOUT HISTORY -->
+        <section id="history">
+            <h2>Workout History</h2>
+
+            <div id="workout-list">
+                <p>No workouts recorded yet.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Fitness Tracker | Sprint 1 Project</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

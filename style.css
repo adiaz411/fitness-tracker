@@ -1,0 +1,193 @@
+/* General Page */
+body {
+
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F0F8FF;
+    color: #333333;
+}
+
+/* Header */
+header {
+    background-color: #A2D2FF;
+    color: #243746;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 18px;
+}
+
+
+/* Navigation Bar */
+nav {
+    background-color: #BDE0FE;
+    padding: 20px;
+    text-align: center;
+}
+
+nav a {
+    color: #243746;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 20px;
+}
+
+nav a:hover {
+    color: #477A91;
+    text-decoration: underline;
+}
+
+/* Main page */
+main {
+    padding: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Sections */
+section {
+    background-color: #FFFFFF;
+    padding: 35px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Section Titles */
+h2 {
+    color: #477A91;
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+/* Dashboard Layout */
+.dashboard-container {
+    display: flex;
+    gap: 25px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* Dashboard Cards */
+.card {
+    background-color: #B9FBC0;
+    color: #243746;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    flex: 1;
+    min-width: 180px;
+}
+
+.card h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.card p {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+/* Workout Form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #477A91;
+}
+
+/* Input Fields */
+input,
+select,
+textarea {
+    padding: 14px;
+    font-size: 16px;
+    border: 2px solid #BDE0FE;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    color: #333333;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+
+    outline: none;
+    border-color: #76C7C0;
+}
+
+/* Buttons */
+button {
+    background-color: #76C7C0;
+    color: #173C3A;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #5CB3AC;
+}
+
+/* Workout History */
+#history {
+    background-color: #FFFFFF;
+}
+
+/* Workout History Items */
+.workout-item {
+    background-color: #E4F7F5;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border-left: 5px solid #76C7C0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    nav a {
+        display: block;
+        margin: 12px 0;
+    }
+    
+
+    main {
+        padding: 15px;
+    }
+
+    section {
+        padding: 20px;
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #477A91;
+    font-size: 14px;
+}
