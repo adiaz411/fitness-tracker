@@ -88,6 +88,49 @@
             </form>
         </section>
 
+        <!-- WEEKLY PROGRESS TRACKER -->
+<section id="progress">
+
+    <h2>Weekly Fitness Progress</h2>
+
+    <p>Set a weekly workout goal and track your progress!</p>
+
+    <div class="progress-container">
+
+        <h3>Weekly Workout Goal</h3>
+
+        <label for="weekly-goal">Workouts per Week:</label>
+
+        <input
+            type="number"
+            id="weekly-goal"
+            min="1"
+            value="5"
+        >
+
+        <button type="button" id="save-goal">
+            Save Goal
+        </button>
+
+        <h3>Your Weekly Progress</h3>
+
+        <p>
+            <span id="completed-workouts">0</span>
+            /
+            <span id="goal-display">5</span>
+            Workouts Completed
+        </p>
+
+        <div class="progress-bar">
+            <div id="progress-fill"></div>
+        </div>
+
+        <p id="progress-percentage">0% Complete</p>
+
+    </div>
+
+</section>
+
         <!-- WORKOUT HISTORY -->
         <section id="history">
             <h2>Workout History</h2>
