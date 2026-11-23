@@ -140,3 +140,131 @@ function updateDashboard() {
 // Load saved workouts 
 displayWorkouts();
 updateDashboard();
+
+// Sprint 2- Adding Progress Tracker
+
+// Load saved weekly goal
+
+let weeklyGoal = Number(localStorage.getItem("weeklyGoal")) || 5;
+
+// Get progress tracker elements
+
+const weeklyGoalInput = document.getElementById("weekly-goal");
+
+const saveGoalButton = document.getElementById("save-goal");
+
+const progressFill = document.getElementById("progress-fill");
+
+const progressPercentage = document.getElementById("progress-percentage");
+
+const progressMessage = document.getElementById("progress-message");
+
+// Display saved goal
+
+weeklyGoalInput.value = weeklyGoal;
+
+// Calculate weekly workout progress
+
+function calculateWeeklyProgress(workouts, goal, today = new Date()) {
+
+    const startOfWeek = new Date(today);
+
+    startOfWeek.setDate(today.getDate() - today.getDay());
+
+    startOfWeek.setHours(0, 0, 0, 0);
+
+    const endOfWeek = new Date(startOfWeek);
+
+    endOfWeek.setDate(startOfWeek.getDate() + 7);
+
+    const completedWorkouts = workouts.filter(function(workout) {
+
+        const workoutDate = new Date(workout.date + "T00:00:00");
+
+        return workoutDate >= startOfWeek &&
+
+               workoutDate < endOfWeek;
+
+    }).length;
+
+    const percentage = goal > 0
+
+        ? Math.min((completedWorkouts / goal) * 100, 100)
+
+        : 0;
+
+    return {
+
+        completed: completedWorkouts,
+
+        goal: goal,
+
+        percentage: percentage
+
+    };
+
+}
+
+// Update progress tracker display
+
+function updateProgressTracker() {
+
+    const progress = calculateWeeklyProgress(workouts, weeklyGoal);
+
+    progressFill.style.width = progress.percentage + "%";
+
+    progressPercentage.textContent =
+
+        Math.round(progress.percentage) + "%";
+
+    progressMessage.textContent =
+
+        progress.completed + " of " +
+
+        progress.goal + " workouts completed";
+
+    const progressBar = progressFill.parentElement;
+
+    progressBar.setAttribute(
+
+        "aria-valuenow",
+
+        Math.round(progress.percentage)
+
+    );
+
+}
+
+// Save weekly workout goal
+
+saveGoalButton.addEventListener("click", function() {
+
+    const newGoal = Number(weeklyGoalInput.value);
+
+    if (!Number.isInteger(newGoal) || newGoal < 1) {
+
+        alert("Please enter a valid weekly goal.");
+
+        return;
+
+    }
+
+    weeklyGoal = newGoal;
+
+    localStorage.setItem("weeklyGoal", weeklyGoal);
+
+    updateProgressTracker();
+
+    alert("Weekly goal saved successfully!");
+
+});
+
+// Load progress when website opens
+
+updateProgressTracker();
+
+
+document.getElementById("weekly-workouts").textContent =
+    weeklyWorkouts.length;
+
+    
