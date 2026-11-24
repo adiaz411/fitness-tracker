@@ -35,7 +35,7 @@ activities such as swimming, running, biking, and weightlifting.
 3. Open index.html in a web browser.
 4. Begin logging workouts.
 
-##Storage
+Store.
 
 Workout information is stored locally in the user's browser
 using JavaScript localStorage.
@@ -44,7 +44,7 @@ Saved workouts remain available after refreshing the page
 or restarting the browser, provided the browser's stored
 data is not cleared.
 
-## Sprint 1 Progress
+## Sprint 1 + 2 Progress
 
 Completed:
 - Fitness Tracker interface
@@ -64,4 +64,4 @@ Future Features:
 
 ## Author
 
-Fitness Tracker - Sprint 1 Project
+Anahi Diaz
