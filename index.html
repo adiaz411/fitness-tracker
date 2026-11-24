@@ -88,7 +88,7 @@
             </form>
         </section>
 
-        <!-- WEEKLY PROGRESS TRACKER -->
+        <!-- WEEKLY PROGRESS TRACKER --> 
 <section id="progress">
 
     <h2>Weekly Fitness Progress</h2>
@@ -121,16 +121,29 @@
             Workouts Completed
         </p>
 
-        <div class="progress-bar">
-            <div id="progress-fill"></div>
+        <!-- PROGRESS BAR -->
+        <div class="progress-bar"
+             role="progressbar"
+             aria-label="Weekly workout progress"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="0">
+
+            <div class="progress-fill" id="progress-fill"></div>
+
         </div>
 
-        <p id="progress-percentage">0% Complete</p>
+        <!-- PROGRESS PERCENTAGE -->
+        <p id="progress-percentage">0%</p>
+
+        <!-- PROGRESS MESSAGE -->
+        <p id="progress-message">
+            Start logging workouts to reach your weekly goal!
+        </p>
 
     </div>
 
 </section>
-
         <!-- WORKOUT HISTORY -->
         <section id="history">
             <h2>Workout History</h2>
