@@ -1,3 +1,4 @@
+import { calculateWeeklyProgress } from "./weeklyprogress.js";
 // FITNESS TRACKER - SPRINT 1
 
 // Load previously saved workouts
@@ -190,58 +191,17 @@ if (weeklyGoalInput) {
     weeklyGoalInput.value = weeklyGoal;
 }
 
-// Calculate 
 
-function calculateWeeklyProgress(workouts, goal, today = new Date()) {
 
-    const startOfWeek = new Date(today);
+// Update progress tracker
 
-    startOfWeek.setDate(today.getDate() - today.getDay());
+function updateProgressTracker(
 
-    startOfWeek.setHours(0, 0, 0, 0);
+    calculateProgress = calculateWeeklyProgress
 
-    const endOfWeek = new Date(startOfWeek);
+) {
 
-    endOfWeek.setDate(startOfWeek.getDate() + 7);
-
-    // Count workouts completed this week
-
-    const completed = workouts.filter(function(workout) {
-
-        const workoutDate = new Date(workout.date + "T00:00:00");
-
-        return workoutDate >= startOfWeek &&
-
-               workoutDate < endOfWeek;
-
-    }).length;
-
-    // Calculate progress percentage
-
-    const percentage = goal > 0
-
-        ? Math.min((completed / goal) * 100, 100)
-
-        : 0;
-
-    return {
-
-        completed: completed,
-
-        goal: goal,
-
-        percentage: percentage
-
-    };
-
-}
-
-// UPDATE PROGRESS TRACKER
-
-function updateProgressTracker() {
-
-    const progress = calculateWeeklyProgress(workouts, weeklyGoal);
-
+    const progress = calculateProgress(workouts, weeklyGoal);
     const progressFill = document.getElementById("progress-fill");
     const completedWorkouts = document.getElementById("completed-workouts");
     const goalDisplay = document.getElementById("goal-display");
