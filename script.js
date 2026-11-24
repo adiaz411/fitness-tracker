@@ -258,18 +258,19 @@ function updateProgressTracker() {
         goalDisplay.textContent = progress.goal;
     }
 
-    // Move progress bar
-    if (progressFill) {
+ // Move progress bar
+ 
+if (progressFill) {
 
-        progressFill.style.width = progress.percentage + "%";
+    progressFill.style.width = progress.percentage + "%";
 
-        if (progressFill.parentElement) {
-            progressFill.parentElement.setAttribute(
-                "aria-valuenow",
-                Math.round(progress.percentage)
-            );
-        }
-    }
+    console.log("Progress bar width:", progress.percentage + "%");
+
+} else {
+
+    console.error("Progress bar element not found!");
+
+}
 
     // Update percentage
     if (progressPercentage) {
