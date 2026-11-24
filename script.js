@@ -8,9 +8,11 @@ const workoutList = document.getElementById("workout-list");
 
 // Save workout
 workoutForm.addEventListener("submit", function(event) {
+
     event.preventDefault();
 
-    const workout = {
+   const workout = {
+
         id: Date.now(),
 
         name: document.getElementById("workout-name").value,
@@ -21,13 +23,14 @@ workoutForm.addEventListener("submit", function(event) {
 
         duration: Number(document.getElementById("duration").value),
 
-        distance: Number(document.getElementById("distance").value),
+        distance: Number(document.getElementById("distance").value) || 0,
 
-        sets: Number(document.getElementById("sets").value),
+        sets: Number(document.getElementById("sets").value) || 0,
 
-        reps: Number(document.getElementById("reps").value),
+        reps: Number(document.getElementById("reps").value) || 0,
 
-        weight: Number(document.getElementById("weight").value)
+        weight: Number(document.getElementById("weight").value) || 0
+
     };
 
 
@@ -42,6 +45,13 @@ workoutForm.addEventListener("submit", function(event) {
 
     updateDashboard();
 
+// Update progress tracker
+
+    if (typeof updateProgressTracker === "function") {
+
+        updateProgressTracker();
+
+    }
     // Clear form
     workoutForm.reset();
 
@@ -89,14 +99,22 @@ function displayWorkouts() {
 
 // Delete workout
 function deleteWorkout(id) {
+
     workouts = workouts.filter(function(workout) {
         return workout.id !== id;
     });
 
+    // Save 
     localStorage.setItem("workouts", JSON.stringify(workouts));
 
+    // Updatehistory
     displayWorkouts();
+
+    // Update dashboard
     updateDashboard();
+
+    // Update progress tracker
+    updateProgressTracker();
 }
 
 // Update dashboard 
@@ -147,7 +165,7 @@ updateDashboard();
 
 let weeklyGoal = Number(localStorage.getItem("weeklyGoal")) || 5;
 
-// Get progress tracker elements
+// Get HTML elements
 
 const weeklyGoalInput = document.getElementById("weekly-goal");
 
@@ -159,11 +177,15 @@ const progressPercentage = document.getElementById("progress-percentage");
 
 const progressMessage = document.getElementById("progress-message");
 
+const completedWorkouts = document.getElementById("completed-workouts");
+
+const goalDisplay = document.getElementById("goal-display");
+
 // Display saved goal
 
 weeklyGoalInput.value = weeklyGoal;
 
-// Calculate weekly workout progress
+// Calculate 
 
 function calculateWeeklyProgress(workouts, goal, today = new Date()) {
 
@@ -177,7 +199,9 @@ function calculateWeeklyProgress(workouts, goal, today = new Date()) {
 
     endOfWeek.setDate(startOfWeek.getDate() + 7);
 
-    const completedWorkouts = workouts.filter(function(workout) {
+    // Count workouts completed this week
+
+    const completed = workouts.filter(function(workout) {
 
         const workoutDate = new Date(workout.date + "T00:00:00");
 
@@ -187,15 +211,17 @@ function calculateWeeklyProgress(workouts, goal, today = new Date()) {
 
     }).length;
 
+    // Calculate progress percentage
+
     const percentage = goal > 0
 
-        ? Math.min((completedWorkouts / goal) * 100, 100)
+        ? Math.min((completed / goal) * 100, 100)
 
         : 0;
 
     return {
 
-        completed: completedWorkouts,
+        completed: completed,
 
         goal: goal,
 
@@ -205,27 +231,29 @@ function calculateWeeklyProgress(workouts, goal, today = new Date()) {
 
 }
 
-// Update progress tracker display
+
+
+// UPDATE PROGRESS TRACKER
 
 function updateProgressTracker() {
 
     const progress = calculateWeeklyProgress(workouts, weeklyGoal);
 
+    // Update completed workouts
+
+    completedWorkouts.textContent = progress.completed;
+
+    // Update goal display
+
+    goalDisplay.textContent = progress.goal;
+
+    // Move bar
+
     progressFill.style.width = progress.percentage + "%";
 
-    progressPercentage.textContent =
 
-        Math.round(progress.percentage) + "%";
 
-    progressMessage.textContent =
-
-        progress.completed + " of " +
-
-        progress.goal + " workouts completed";
-
-    const progressBar = progressFill.parentElement;
-
-    progressBar.setAttribute(
+    progressFill.parentElement.setAttribute(
 
         "aria-valuenow",
 
@@ -233,9 +261,40 @@ function updateProgressTracker() {
 
     );
 
+    // Update percentage if element exists
+
+    if (progressPercentage) {
+
+        progressPercentage.textContent =
+
+            Math.round(progress.percentage) + "%";
+
+    }
+
+    // Update progress message if element exists
+
+    if (progressMessage) {
+
+        if (progress.completed >= progress.goal) {
+
+            progressMessage.textContent =
+
+                "Congratulations! You reached your weekly goal!";
+
+        } else {
+
+            progressMessage.textContent =
+
+                (progress.goal - progress.completed) +
+
+                " more workouts to reach your weekly goal!";
+
+        }
+
+    }
+
 }
 
-// Save weekly workout goal
 
 saveGoalButton.addEventListener("click", function() {
 
@@ -251,7 +310,11 @@ saveGoalButton.addEventListener("click", function() {
 
     weeklyGoal = newGoal;
 
+    // Save goal in browser
+
     localStorage.setItem("weeklyGoal", weeklyGoal);
+
+    // Update progress
 
     updateProgressTracker();
 
@@ -259,12 +322,5 @@ saveGoalButton.addEventListener("click", function() {
 
 });
 
-// Load progress when website opens
 
 updateProgressTracker();
-
-
-document.getElementById("weekly-workouts").textContent =
-    weeklyWorkouts.length;
-
-    
